@@ -1,7 +1,6 @@
 streamlit
 numpy
 pandas
-joblib
 tensorflow
 scikit-learn
 lightgbm
