@@ -10,7 +10,7 @@ Original file is located at
 import streamlit as st
 import pandas as pd
 import numpy as np
-import joblib
+import pickle
 from tensorflow.keras.models import load_model
 import requests
 import time
@@ -77,9 +77,12 @@ def prepare_input(df, feature_cols):
     return df[feature_cols].iloc[-1:].copy()
 
 # --- Load models and scaler ---
-model_lgbm = joblib.load("price_model_lgbm_5min.pkl")
+with open("price_model_lgbm_5min.pkl", "rb") as f:
+    model_lgbm = pickle.load(f)
+with open("scaler.pkl", "rb") as f:
+    scaler = pickle.load(f)
 model_brnn = load_model("price_model_brnn_5min.h5")
-scaler = joblib.load("scaler.pkl")
+
 
 # --- Feature columns used during training ---
 feature_cols = [
